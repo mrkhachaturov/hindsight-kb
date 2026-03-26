@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Self-updating vector knowledge base for Hindsight — semantic search over docs, engine code, and integrations with automatic release tracking",
   "type": "module",
+  "private": false,
+  "main": "lib/db.js",
   "bin": {
     "hindsight-kb": "./bin/cli.js"
   },
@@ -22,6 +24,10 @@
   },
   "author": "Ruben Khachaturov <mr.kha4a2rov@protonmail.com>",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrkhachaturov/hindsight-kb/issues"
+  },
+  "homepage": "https://github.com/mrkhachaturov/hindsight-kb#readme",
   "engines": {
     "node": ">=22.0.0"
   },

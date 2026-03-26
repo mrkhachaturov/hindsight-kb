@@ -241,7 +241,7 @@ function syncRecentReleaseMetadata() {
  */
 async function indexReleaseChangelogs(currentRelease = null) {
   const db = openDb();
-  const allReleases = db.prepare('SELECT * FROM releases ORDER BY date DESC').all();
+  const allReleases = db.prepare('SELECT * FROM releases ORDER BY COALESCE(release_date, date) DESC').all();
   const releases = allReleases.slice(0, 3);
   const desiredPaths = new Set(releases.map(release => `releases/${release.tag}`));
 

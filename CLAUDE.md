@@ -37,12 +37,12 @@ tests/*.test.js         # Node built-in test runner
 
 ## Key Patterns
 
-- **Config getters**: `getUpstreamRoot()`, `getDbPath()`, `getLogDir()` — read env vars on demand so CLI `--upstream-dir` / `--data-dir` overrides work after module load. `getUpstreamRoot()` throws if `HINDSIGHT_UPSTREAM_DIR` is not set.
+- **Config getters**: `getUpstreamRoot()`, `getDbPath()`, `getLogDir()` — read env vars on demand so CLI `--upstream-dir` / `--data-dir` overrides work after module load. Defaults: `getUpstreamRoot()` → `./source`, `getKbDataDir()` → `./data`.
 - **Static exports**: `EMBEDDING_PROVIDER`, `EMBEDDING_MODEL`, etc. exist for simple access, but commands that accept CLI overrides must use the getter functions.
 - **Command pattern**: each `commands/*.js` exports `register(program)` for commander and `handler(options)` for standalone/programmatic use.
 - **MCP server**: `commands/mcp-serve.js` does NOT call handler() functions (they call process.exit). Instead it imports directly from `lib/` and returns structured MCP responses.
 - **Exit codes**: 0=success, 1=runtime error, 2=config error, 3=no results (in `lib/exit-codes.js`).
-- **Embedding provider**: `KB_EMBEDDING_PROVIDER=openai|local` — embedder.js dispatches transparently. Default is `local` (ONNX).
+- **Embedding provider**: `KB_EMBEDDING_PROVIDER=openai|local` — embedder.js dispatches transparently. Default is `openai`.
 - **Phase gating**: Sources are split into phase 1 (always active) and phase 2 (opt-in via `KB_EXTRA_SOURCES`). `getActiveSources()` filters accordingly. Phase 2 sources: `tests`, `control-plane`, `skills`, `cookbook`.
 - **Version**: never hardcode — always read from package.json at runtime.
 
@@ -134,13 +134,13 @@ Consumer config (`.mcp.json`):
 
 | Variable | Default | Notes |
 |----------|---------|-------|
-| `HINDSIGHT_UPSTREAM_DIR` | required | Hindsight upstream git checkout (monorepo root) |
-| `KB_DATA_DIR` | `./data/kb` | SQLite DB + logs |
-| `OPENAI_API_KEY` | required | Only when `KB_EMBEDDING_PROVIDER=openai` |
-| `KB_EMBEDDING_PROVIDER` | `local` | `openai` or `local` (ONNX) |
-| `KB_EMBEDDING_MODEL` | `text-embedding-3-small` | OpenAI model name |
-| `KB_LOCAL_MODEL` | `Xenova/all-MiniLM-L6-v2` | ONNX model name |
-| `KB_LOG_DIR` | `$KB_DATA_DIR/logs` | Override log directory |
+| `HINDSIGHT_UPSTREAM_DIR` | `./source` | Hindsight upstream git checkout |
+| `KB_DATA_DIR` | `./data` | SQLite DB + logs |
+| `OPENAI_API_KEY` | required | For openai embedding provider |
+| `KB_EMBEDDING_PROVIDER` | `openai` | `local` for ONNX |
+| `KB_EMBEDDING_MODEL` | `text-embedding-3-small` | OpenAI model |
+| `KB_LOCAL_MODEL` | `all-MiniLM-L6-v2` | ONNX model |
+| `KB_LOG_DIR` | `$KB_DATA_DIR/log` | Override log path |
 | `KB_EXTRA_SOURCES` | `` | Comma-separated phase 2 sources to activate globally |
 
 ## Testing
