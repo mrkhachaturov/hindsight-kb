@@ -1,0 +1,51 @@
+{
+  "name": "hindsight-kb",
+  "version": "1.0.0",
+  "description": "Self-updating vector knowledge base for Hindsight — semantic search over docs, engine code, and integrations with automatic release tracking",
+  "type": "module",
+  "bin": {
+    "hindsight-kb": "./bin/cli.js"
+  },
+  "files": [
+    "bin/",
+    "commands/",
+    "lib/",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node --test tests/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrkhachaturov/hindsight-kb.git"
+  },
+  "author": "Ruben Khachaturov <mr.kha4a2rov@protonmail.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=22.0.0"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.27.1",
+    "commander": "^14.0.3",
+    "sqlite-vec": "0.1.7-alpha.2",
+    "zod": "^3.25.76"
+  },
+  "optionalDependencies": {
+    "@huggingface/transformers": "^3.8.0"
+  },
+  "keywords": [
+    "hindsight",
+    "knowledge-base",
+    "vector-search",
+    "semantic-search",
+    "embeddings",
+    "sqlite",
+    "ai",
+    "llm",
+    "rag",
+    "mcp",
+    "model-context-protocol",
+    "agent-memory"
+  ]
+}
