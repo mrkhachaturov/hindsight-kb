@@ -11,6 +11,33 @@ program
   .description('Self-updating vector knowledge base for Hindsight')
   .version(pkg.version);
 
-// Commands will be registered here in Task 12
+import { register as registerStats } from '../commands/stats.js';
+import { register as registerLatest } from '../commands/latest.js';
+import { register as registerHistory } from '../commands/history.js';
+import { register as registerSince } from '../commands/since.js';
+import { register as registerQuery } from '../commands/query.js';
+import { registerDocs, registerCode, registerTests, registerVerify } from '../commands/aliases.js';
+
+registerStats(program);
+registerLatest(program);
+registerHistory(program);
+registerSince(program);
+registerQuery(program);
+registerDocs(program);
+registerCode(program);
+registerTests(program);
+registerVerify(program);
+
+import { register as registerIndex } from '../commands/index.js';
+registerIndex(program);
+
+import { register as registerSync } from '../commands/sync.js';
+registerSync(program);
+
+import { register as registerInstallService } from '../commands/install-service.js';
+registerInstallService(program);
+
+import { register as registerMcpServe } from '../commands/mcp-serve.js';
+registerMcpServe(program);
 
 program.parse();
