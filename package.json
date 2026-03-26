@@ -1,6 +1,6 @@
 {
   "name": "hindsight-kb",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Self-updating vector knowledge base for Hindsight — semantic search over docs, engine code, and integrations with automatic release tracking",
   "type": "module",
   "private": false,
